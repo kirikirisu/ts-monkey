@@ -20,6 +20,9 @@ const token = {
   ASTERISK: "*",
   SLASH: "/",
 
+  EQ: "==",
+  NOT_EQ: "!=",
+
   LT: "<",
   GT: ">",
 

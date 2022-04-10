@@ -38,6 +38,11 @@ export class Lexer implements LexerIF {
 
     switch (this.ch) {
       case "=":
+        if (this.peekChar() === "=") {
+          tok = this.newToken(token.EQ, "==");
+          this.readChar();
+          break;
+        }
         tok = this.newToken(token.ASSIGN, this.ch);
         break;
       case ";":
@@ -59,6 +64,11 @@ export class Lexer implements LexerIF {
         tok = this.newToken(token.MINUS, this.ch);
         break;
       case "!":
+        if (this.peekChar() === "=") {
+          tok = this.newToken(token.NOT_EQ, "!=");
+          this.readChar();
+          break;
+        }
         tok = this.newToken(token.BANG, this.ch);
         break;
       case "/":
@@ -104,6 +114,14 @@ export class Lexer implements LexerIF {
     this.readChar();
     // console.log("tok", tok);
     return tok;
+  }
+
+  peekChar(): Byte {
+    if (this.readPosition >= this.input.length) {
+      return 0;
+    } else {
+      return this.input[this.readPosition];
+    }
   }
 
   readIdentifier() {
