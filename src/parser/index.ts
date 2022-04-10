@@ -1,6 +1,7 @@
 import { Lexer } from "../lexer";
 import { Token, token, TokenType } from "../token";
-import { LetStatement, Program, Statement, Identifier } from "../ast";
+import { LetStatement, Program, Identifier } from "../ast";
+import { Statement } from "../ast/interface";
 
 interface ParserIF {
   l: Lexer;

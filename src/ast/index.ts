@@ -1,23 +1,12 @@
 import { Token } from "../token";
+import {
+  IdentifierIF,
+  Expression,
+  LetStatementIF,
+  Statement,
+} from "./interface";
 
-interface Node {
-  tokenLiteral: () => string;
-}
-
-export interface Statement extends Node {
-  statementNode: () => void;
-}
-
-interface Expression extends Node {
-  expressionNode: () => void;
-}
-
-interface IdentifierIF extends Expression {
-  token: Token;
-  value: string;
-}
-
-export class Identifier implements IdentifierIF {
+class Identifier implements IdentifierIF {
   token: Token;
   value: string;
 
@@ -33,13 +22,7 @@ export class Identifier implements IdentifierIF {
   }
 }
 
-interface LetStatementIF extends Statement {
-  token: Token;
-  name?: Identifier;
-  value?: Expression;
-}
-
-export class LetStatement implements LetStatementIF {
+class LetStatement implements LetStatementIF {
   token: Token;
   name?: Identifier;
   value?: Expression;
@@ -55,11 +38,7 @@ export class LetStatement implements LetStatementIF {
   }
 }
 
-interface ProgramIF {
-  statements: Statement[];
-}
-
-export class Program {
+class Program {
   statements: Statement[] = [];
 
   tokenLiteral(): string {
@@ -70,3 +49,5 @@ export class Program {
     }
   }
 }
+
+export { Identifier, LetStatement, Program };

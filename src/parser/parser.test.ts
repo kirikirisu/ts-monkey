@@ -1,6 +1,7 @@
 import { Lexer } from "../lexer";
 import { Parser } from "../parser";
-import { Statement, LetStatement } from "../ast";
+import { LetStatement } from "../ast";
+import { Statement } from "../ast/interface";
 
 test("parseProgramが期待したastを返すこと", () => {
   const input = `
