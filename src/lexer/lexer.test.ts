@@ -15,6 +15,15 @@ let add = fn(x, y) {
 };
 
 let result = add(five, ten);
+!-/*5;
+5 < 10 > 5;
+
+if (5 < 10) {
+  return true;
+} else {
+  return false;
+}
+
   `;
 
   const tests: ExpectedToken[] = [
@@ -54,6 +63,35 @@ let result = add(five, ten);
     { expectedType: token.IDENT, expectedLiteral: "ten" },
     { expectedType: token.RPAREN, expectedLiteral: ")" },
     { expectedType: token.SEMICOLON, expectedLiteral: ";" },
+    { expectedType: token.BANG, expectedLiteral: "!" },
+    { expectedType: token.MINUS, expectedLiteral: "-" },
+    { expectedType: token.SLASH, expectedLiteral: "/" },
+    { expectedType: token.ASTERISK, expectedLiteral: "*" },
+    { expectedType: token.INT, expectedLiteral: "5" },
+    { expectedType: token.SEMICOLON, expectedLiteral: ";" },
+    { expectedType: token.INT, expectedLiteral: "5" },
+    { expectedType: token.LT, expectedLiteral: "<" },
+    { expectedType: token.INT, expectedLiteral: "10" },
+    { expectedType: token.GT, expectedLiteral: ">" },
+    { expectedType: token.INT, expectedLiteral: "5" },
+    { expectedType: token.SEMICOLON, expectedLiteral: ";" },
+    { expectedType: token.IF, expectedLiteral: "if" },
+    { expectedType: token.LPAREN, expectedLiteral: "(" },
+    { expectedType: token.INT, expectedLiteral: "5" },
+    { expectedType: token.LT, expectedLiteral: "<" },
+    { expectedType: token.INT, expectedLiteral: "10" },
+    { expectedType: token.RPAREN, expectedLiteral: ")" },
+    { expectedType: token.LBRACE, expectedLiteral: "{" },
+    { expectedType: token.RETURN, expectedLiteral: "return" },
+    { expectedType: token.TRUE, expectedLiteral: "true" },
+    { expectedType: token.SEMICOLON, expectedLiteral: ";" },
+    { expectedType: token.RBRACE, expectedLiteral: "}" },
+    { expectedType: token.ELSE, expectedLiteral: "else" },
+    { expectedType: token.LBRACE, expectedLiteral: "{" },
+    { expectedType: token.RETURN, expectedLiteral: "return" },
+    { expectedType: token.FALSE, expectedLiteral: "false" },
+    { expectedType: token.SEMICOLON, expectedLiteral: ";" },
+    { expectedType: token.RBRACE, expectedLiteral: "}" },
     { expectedType: token.EOF, expectedLiteral: "" },
   ];
 

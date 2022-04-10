@@ -15,6 +15,13 @@ const token = {
 
   ASSIGN: "=",
   PLUS: "+",
+  MINUS: "-",
+  BANG: "!",
+  ASTERISK: "*",
+  SLASH: "/",
+
+  LT: "<",
+  GT: ">",
 
   COMMA: ",",
   SEMICOLON: ";",
@@ -26,6 +33,11 @@ const token = {
 
   FUNCTION: "FUNCTION",
   LET: "LET",
+  TRUE: "TRUE",
+  FALSE: "FALSE",
+  IF: "IF",
+  ELSE: "ELSE",
+  RETURN: "RETURN",
 };
 
 interface KEYWORDS {
@@ -35,6 +47,11 @@ interface KEYWORDS {
 const keywords: KEYWORDS = {
   fn: token.FUNCTION,
   let: token.LET,
+  true: token.TRUE,
+  false: token.FALSE,
+  if: token.IF,
+  else: token.ELSE,
+  return: token.RETURN,
 };
 
 const lookupIdent = (ident: string): TokenType => {
