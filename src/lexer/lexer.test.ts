@@ -1,5 +1,5 @@
 import { TokenType, Token, token } from "../token";
-import { Lexer } from "./lexer";
+import { Lexer } from "./";
 
 test("nextTokenが期待したtokenを返すこと", () => {
   type ExpectedToken = {
