@@ -8,18 +8,21 @@ interface ParserIF {
 
   curToken: Token;
   peekToken: Token;
+  errors: string[];
 }
 
 export class Parser implements ParserIF {
   l: Lexer;
   curToken: Token;
   peekToken: Token;
+  errors: string[];
 
   constructor(l: Lexer) {
     this.l = l;
 
     this.curToken = this.l.nextToken();
     this.peekToken = this.l.nextToken();
+    this.errors = [];
   }
 
   nextToken(): void {
@@ -50,17 +53,19 @@ export class Parser implements ParserIF {
     }
   }
 
-  parseLetStatement(): LetStatement {
+  parseLetStatement(): LetStatement | null {
     const stmt = new LetStatement(this.curToken);
 
     if (!this.expectPeek(token.IDENT)) {
-      throw new Error("let: letの後は識別子が期待されています。");
+      // throw new Error("let: letの後は識別子が期待されています。");
+      return null;
     }
 
     stmt.name = new Identifier(this.curToken, this.curToken.Literal as string);
 
     if (!this.expectPeek(token.ASSIGN)) {
-      throw new Error("let: 識別子の後は = が期待されています。");
+      // throw new Error("let: 識別子の後は = が期待されています。");
+      return null;
     }
 
     while (!this.curTokenIs(token.SEMICOLON)) {
@@ -75,6 +80,7 @@ export class Parser implements ParserIF {
       this.nextToken();
       return true;
     } else {
+      this.peekError(t);
       return false;
     }
   }
@@ -85,5 +91,14 @@ export class Parser implements ParserIF {
 
   private curTokenIs(t: TokenType): boolean {
     return this.curToken.Type === t;
+  }
+
+  pickUpErrors(): string[] {
+    return this.errors;
+  }
+
+  peekError(t: TokenType): void {
+    const msg = `expected next token to be ${t}, got ${this.peekToken.Type} instead`;
+    this.errors = [...this.errors, msg];
   }
 }

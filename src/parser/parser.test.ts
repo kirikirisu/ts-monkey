@@ -5,9 +5,9 @@ import { Statement } from "../ast/interface";
 
 test("parseProgramが期待したastを返すこと", () => {
   const input = `
-let x = 5;
-let y = 10;
-let foobar = 838383;
+let x  5;
+let = 10;
+let 838383;
   `;
 
   const l = new Lexer(input, 0, 1, input[0]);
@@ -15,6 +15,7 @@ let foobar = 838383;
 
   const program = p.parseProgram();
   if (program === null) throw new Error("parse program return null.");
+  checkParserErrors(p);
 
   expect(program.statements.length).toBe(3);
 
@@ -38,4 +39,18 @@ const testLetStatement = (s: Statement, name: string) => {
   if (!letStmt.name) throw new Error("letStmt.name is undefined");
   expect(letStmt.name.value).toBe(name);
   expect(letStmt.name.tokenLiteral()).toBe(name);
+};
+
+const checkParserErrors = (p: Parser) => {
+  const errors = p.pickUpErrors();
+  if (errors.length === 0) {
+    return;
+  }
+
+  console.error(`parser has ${errors.length} errors`);
+  errors.map((msg) => {
+    console.error(`parser error: ${msg}`);
+  });
+
+  throw new Error("error happen on checkParserErrors()");
 };
