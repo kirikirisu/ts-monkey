@@ -1,6 +1,6 @@
 import { Lexer } from "../lexer";
 import { Token, token, TokenType } from "../token";
-import { LetStatement, Program, Identifier } from "../ast";
+import { Identifier, LetStatement, ReturnStatement, Program } from "../ast";
 import { Statement } from "../ast/interface";
 
 interface ParserIF {
@@ -48,9 +48,23 @@ export class Parser implements ParserIF {
     switch (this.curToken.Type) {
       case token.LET:
         return this.parseLetStatement();
+      case token.RETURN:
+        return this.parseReturnStatement();
       default:
         return null;
     }
+  }
+
+  parseReturnStatement(): ReturnStatement {
+    const stmt = new ReturnStatement(this.curToken);
+
+    this.nextToken();
+
+    while (!this.curTokenIs(token.SEMICOLON)) {
+      this.nextToken();
+    }
+
+    return stmt;
   }
 
   parseLetStatement(): LetStatement | null {

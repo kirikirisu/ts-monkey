@@ -1,8 +1,9 @@
 import { Token } from "../token";
 import {
-  IdentifierIF,
   Expression,
+  IdentifierIF,
   LetStatementIF,
+  ReturnStatementIF,
   Statement,
 } from "./interface";
 
@@ -38,6 +39,21 @@ class LetStatement implements LetStatementIF {
   }
 }
 
+class ReturnStatement implements ReturnStatementIF {
+  token: Token;
+  returnValue?: Expression;
+
+  constructor(token: Token) {
+    this.token = token;
+  }
+
+  statementNode(): void {}
+
+  tokenLiteral(): string {
+    return this.token.Literal as string;
+  }
+}
+
 class Program {
   statements: Statement[] = [];
 
@@ -50,4 +66,4 @@ class Program {
   }
 }
 
-export { Identifier, LetStatement, Program };
+export { Identifier, LetStatement, ReturnStatement, Program };

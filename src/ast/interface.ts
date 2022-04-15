@@ -24,8 +24,21 @@ interface LetStatementIF extends Statement {
   value?: Expression;
 }
 
+interface ReturnStatementIF extends Statement {
+  token: Token;
+  returnValue?: Expression;
+}
+
 interface ProgramIF {
   statements: Statement[];
 }
 
-export { Node, Statement, Expression, IdentifierIF, LetStatementIF, ProgramIF };
+export {
+  Node,
+  Statement,
+  Expression,
+  IdentifierIF,
+  LetStatementIF,
+  ReturnStatementIF,
+  ProgramIF,
+};
